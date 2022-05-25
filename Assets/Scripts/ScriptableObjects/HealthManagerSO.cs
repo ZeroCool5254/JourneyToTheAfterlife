@@ -1,14 +1,14 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Contracts;
 
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "HealthManagerSO", menuName = "ScriptableObjects/Health Manager")]
     public class HealthManagerSO : ScriptableObject
     {
-        public int Health;
+        public int Health { get; private set; }
         public int MaxHealth = 6;
 
         [NonSerialized] public UnityEvent<int> HealthChangedEvent;

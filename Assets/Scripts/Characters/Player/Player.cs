@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Contracts;
 using ScriptableObjects;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Characters.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(PolygonCollider2D))]
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _moveSpeed;
         [SerializeField] private float _jumpForce;
@@ -88,7 +86,6 @@ namespace Characters.Player
             if (_isGrounded && !_wallSliding)
             {
                 _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
-                //_rigid.velocity = Vector2.up * _jumpForce;
                 //show jump animations
             }
 
@@ -118,15 +115,16 @@ namespace Characters.Player
             }
         }
 
-        private void Damage()
+        public void Damage()
         {
-            //Play damage logic
+            //play damage animation
             _healthManager.DecreaseHealth();
 
             if (_healthManager.Health <= 0)
             {
                 _isDead = true;
-                //Game over routine
+                //play death animation
+                //Game over
             }
         }
     }
