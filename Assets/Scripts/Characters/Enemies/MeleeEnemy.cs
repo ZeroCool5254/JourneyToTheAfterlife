@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using Contracts;
 using UnityEngine;
 
 namespace Characters.Enemies
 {
-    public class MeleeEnemy : EnemyAI, IDamageable
+    public class MeleeEnemy : EnemyAI
     {
         [SerializeField, Header("Weapon")] private GameObject _weapon;
         [SerializeField] private float _attackDistance;

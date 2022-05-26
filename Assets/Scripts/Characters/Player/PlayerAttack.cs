@@ -12,16 +12,28 @@ namespace Characters.Player
         [SerializeField] private float _attackCooldown;
         
         [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
+        [SerializeField] private PlayerInputManagerSO _playerInputManager;
 
         private bool _isAttacking;
         
         private InputManager _inputManager;
 
-        private void Start()
+        private void OnEnable()
         {
             _inputManager = new InputManager();
             _inputManager.Player.Attack.performed += Attack;
-            _inputManager.Player.Enable();
+            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+        }
+
+        private void OnDisable()
+        {
+            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+        }
+
+        private void EnableInput(bool state)
+        {
+            if (state) _inputManager.Player.Enable();
+            else _inputManager.Player.Disable();
         }
 
         private void Attack(InputAction.CallbackContext context)

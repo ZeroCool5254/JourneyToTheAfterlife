@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
-using Contracts;
 
 namespace ScriptableObjects
 {

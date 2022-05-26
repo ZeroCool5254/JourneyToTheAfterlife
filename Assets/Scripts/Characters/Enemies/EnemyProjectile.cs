@@ -1,5 +1,6 @@
-﻿using Contracts;
-using UnityEngine;
+﻿using UnityEngine;
+
+using Characters.Player;
 
 namespace Characters.Enemies
 {
@@ -32,13 +33,8 @@ namespace Characters.Enemies
         {
             if (other.CompareTag("Player"))
             {
-                IDamageable hit = other.GetComponent<IDamageable>();
-                if (hit != null)
-                {
-                    hit.Damage();
-                    Destroy(gameObject);
-                }
-                else Debug.LogError("EnemyProjectile::Hit is null!");
+                other.GetComponent<PlayerController>().Damage();
+                Destroy(gameObject);
             }
 
             if (other.CompareTag("Ground"))

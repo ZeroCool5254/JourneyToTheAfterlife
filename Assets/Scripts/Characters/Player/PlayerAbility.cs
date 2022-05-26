@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -15,6 +16,7 @@ namespace Characters.Player
         [SerializeField] private Light2D _light;
         
         [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
+        [SerializeField] private PlayerInputManagerSO _playerInputManager;
         
         private SpriteRenderer _spriteRenderer;
         private Color _inactiveColor;
@@ -29,13 +31,29 @@ namespace Characters.Player
 
         private void Start()
         {
-            _inputManager = new InputManager();
-            _inputManager.Player.Ability.performed += PerformAbility;
-            _inputManager.Player.Enable();
+
             _inactiveColor = _spriteRenderer.color;
             _inactiveIntensity = _light.intensity;
             //delayed UI update event
             _manaManager.ManaChangedEvent.Invoke(_manaManager.Mana);
+        }
+
+        private void OnEnable()
+        {
+            _inputManager = new InputManager();
+            _inputManager.Player.Ability.performed += PerformAbility;
+            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+        }
+
+        private void OnDisable()
+        {
+            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+        }
+
+        private void EnableInput(bool state)
+        {
+            if (state) _inputManager.Player.Enable();
+            else _inputManager.Player.Disable();
         }
 
         public void PerformAbility(InputAction.CallbackContext context)

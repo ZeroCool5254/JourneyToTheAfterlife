@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "AbilityManagerSO", menuName = "ScriptableObjects/Ability Manager")]
+    [CreateAssetMenu(fileName = "ManaManagerSO", menuName = "ScriptableObjects/Mana Manager")]
     public class ManaManagerSO : ScriptableObject
     {
         public float Mana;
