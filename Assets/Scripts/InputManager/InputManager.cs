@@ -154,22 +154,22 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Dialogue"",
+            ""name"": ""UI"",
             ""id"": ""5173e138-d743-405c-8dc5-85c7680076f2"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
-                    ""type"": ""Button"",
-                    ""id"": ""cbb5c293-36cc-4c0e-99e0-fb826d56f46d"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Navigate"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""65583ba2-2c00-4ba4-afec-294cc3c82bc0"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Continue"",
+                    ""name"": ""Submit"",
                     ""type"": ""Button"",
-                    ""id"": ""4d6545b8-26a4-480e-9baf-abb231f6f481"",
+                    ""id"": ""fbad0b24-75f8-4780-924a-77dae83bfdd4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -178,7 +178,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
-                    ""id"": ""02b3d153-130b-4e07-8e95-3b3697a1ef2f"",
+                    ""id"": ""8586393c-791e-4a19-84de-3d3bda83eb1f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -187,52 +187,118 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""53719f31-f68e-4bb5-9458-2c646dd50c84"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Continue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Keyboard"",
-                    ""id"": ""393ad4ce-5d81-4fac-b28d-b18ea0a0c05d"",
-                    ""path"": ""1DAxis"",
+                    ""id"": ""f6cd900a-921d-4670-bf8b-ba6f0a753f2d"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""2a8923a1-685f-42b6-8e36-6497fea46c06"",
-                    ""path"": ""<Keyboard>/downArrow"",
+                    ""name"": ""up"",
+                    ""id"": ""ba597cab-338f-430b-af86-7ec708fd8647"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""positive"",
-                    ""id"": ""e4ec7114-c24b-44f1-8aa3-ef61302aada8"",
+                    ""name"": ""up"",
+                    ""id"": ""7f62f485-375f-41e8-a263-154f6824df17"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8798eec4-3097-4231-be9b-22afc640f05b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""78ba36e1-d44f-43b8-abca-c7e97324e7b0"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9c48c007-5765-4933-af4a-01914e4b373a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""0d56c7cb-333a-4509-ae33-7422601fa667"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""460b97b7-1857-4b00-9b5a-454f751e8582"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""14cb4cd2-86ed-4933-91f2-6a22341cb410"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""81b8d869-698f-4db2-a8e5-a18e2c3a44a8"",
+                    ""id"": ""35915bfe-60e2-4956-90cb-9d788f324aa4"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d70a7b17-f9f3-4d30-b43c-304ad68c5ccc"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -253,11 +319,11 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        // Dialogue
-        m_Dialogue = asset.FindActionMap("Dialogue", throwIfNotFound: true);
-        m_Dialogue_Move = m_Dialogue.FindAction("Move", throwIfNotFound: true);
-        m_Dialogue_Continue = m_Dialogue.FindAction("Continue", throwIfNotFound: true);
-        m_Dialogue_Cancel = m_Dialogue.FindAction("Cancel", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+        m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -379,54 +445,54 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // Dialogue
-    private readonly InputActionMap m_Dialogue;
-    private IDialogueActions m_DialogueActionsCallbackInterface;
-    private readonly InputAction m_Dialogue_Move;
-    private readonly InputAction m_Dialogue_Continue;
-    private readonly InputAction m_Dialogue_Cancel;
-    public struct DialogueActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Navigate;
+    private readonly InputAction m_UI_Submit;
+    private readonly InputAction m_UI_Cancel;
+    public struct UIActions
     {
         private @InputManager m_Wrapper;
-        public DialogueActions(@InputManager wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Dialogue_Move;
-        public InputAction @Continue => m_Wrapper.m_Dialogue_Continue;
-        public InputAction @Cancel => m_Wrapper.m_Dialogue_Cancel;
-        public InputActionMap Get() { return m_Wrapper.m_Dialogue; }
+        public UIActions(@InputManager wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+        public InputAction @Submit => m_Wrapper.m_UI_Submit;
+        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DialogueActions set) { return set.Get(); }
-        public void SetCallbacks(IDialogueActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_DialogueActionsCallbackInterface != null)
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnMove;
-                @Continue.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinue;
-                @Continue.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinue;
-                @Continue.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnContinue;
-                @Cancel.started -= m_Wrapper.m_DialogueActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_DialogueActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_DialogueActionsCallbackInterface.OnCancel;
+                @Navigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Navigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNavigate;
+                @Submit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
+                @Submit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
+                @Submit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
+                @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
             }
-            m_Wrapper.m_DialogueActionsCallbackInterface = instance;
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Continue.started += instance.OnContinue;
-                @Continue.performed += instance.OnContinue;
-                @Continue.canceled += instance.OnContinue;
+                @Navigate.started += instance.OnNavigate;
+                @Navigate.performed += instance.OnNavigate;
+                @Navigate.canceled += instance.OnNavigate;
+                @Submit.started += instance.OnSubmit;
+                @Submit.performed += instance.OnSubmit;
+                @Submit.canceled += instance.OnSubmit;
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
             }
         }
     }
-    public DialogueActions @Dialogue => new DialogueActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -435,10 +501,10 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         void OnAbility(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
-    public interface IDialogueActions
+    public interface IUIActions
     {
-        void OnMove(InputAction.CallbackContext context);
-        void OnContinue(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
     }
 }

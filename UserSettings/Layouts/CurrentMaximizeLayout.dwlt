@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 16089
+  controlID: 23381
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 16090
+  controlID: 23382
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 678
     height: 291
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 5}
@@ -617,7 +617,7 @@ MonoBehaviour:
   - {fileID: 9}
   - {fileID: 10}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -648,7 +648,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -75836
+  m_LastSelectedObjectID: 64054
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -697,13 +697,13 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 0
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 4a054d804d62389b99a6139e5da4e7a5c9f54fa7259c86ad51c5a7ae8030a7c2b4f94ac8848d6dd772357ee2163847e397aaf1ea2c0605f1779923f18e4af4feb0b418ff1d97b7ffeaee36179ef3dc24b63a3436a5704b426c93b04541f660552dcd6a57ab42b468
+    m_SelectedIDs: 03c210a0
+    m_LastClickedID: -1609514493
+    m_ExpandedIDs: 4a054d804d62389bce33fea25da4e7a5c9f54fa7259c86ad51c5a7aea60fa7b28030a7c244f8a1c5b4f94ac872357ee2163847e397aaf1ea7c1d49eb2c0605f18e4af4feb0b418ff1d97b7ffeaee36179ef3dc24b63a3436a5704b426c93b04541f660552dcd6a57ab42b468
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -802,43 +802,73 @@ MonoBehaviour:
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Interact\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                }\n            ]\n        },\n       
-      {\n            \"name\": \"Dialogue\",\n            \"id\": \"5173e138-d743-405c-8dc5-85c7680076f2\",\n           
-      \"actions\": [\n                {\n                    \"name\": \"Move\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"cbb5c293-36cc-4c0e-99e0-fb826d56f46d\",\n                   
-      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
-      \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"Continue\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"4d6545b8-26a4-480e-9baf-abb231f6f481\",\n                   
-      \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
+      {\n            \"name\": \"UI\",\n            \"id\": \"5173e138-d743-405c-8dc5-85c7680076f2\",\n           
+      \"actions\": [\n                {\n                    \"name\": \"Navigate\",\n                   
+      \"type\": \"PassThrough\",\n                    \"id\": \"65583ba2-2c00-4ba4-afec-294cc3c82bc0\",\n                   
+      \"expectedControlType\": \"Vector2\",\n                    \"processors\":
+      \"\",\n                    \"interactions\": \"\",\n                    \"initialStateCheck\":
+      false\n                },\n                {\n                    \"name\":
+      \"Submit\",\n                    \"type\": \"Button\",\n                   
+      \"id\": \"fbad0b24-75f8-4780-924a-77dae83bfdd4\",\n                    \"expectedControlType\":
+      \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       },\n                {\n                    \"name\": \"Cancel\",\n                   
-      \"type\": \"Button\",\n                    \"id\": \"02b3d153-130b-4e07-8e95-3b3697a1ef2f\",\n                   
+      \"type\": \"Button\",\n                    \"id\": \"8586393c-791e-4a19-84de-3d3bda83eb1f\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
       }\n            ],\n            \"bindings\": [\n                {\n                   
-      \"name\": \"\",\n                    \"id\": \"53719f31-f68e-4bb5-9458-2c646dd50c84\",\n                   
-      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"Keyboard\",\n                    \"id\": \"f6cd900a-921d-4670-bf8b-ba6f0a753f2d\",\n                   
+      \"path\": \"2DVector\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Continue\",\n                    \"isComposite\": false,\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": true,\n                   
       \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"Keyboard\",\n                    \"id\": \"393ad4ce-5d81-4fac-b28d-b18ea0a0c05d\",\n                   
-      \"path\": \"1DAxis\",\n                    \"interactions\": \"\",\n                   
+      \"name\": \"up\",\n                    \"id\": \"ba597cab-338f-430b-af86-7ec708fd8647\",\n                   
+      \"path\": \"<Keyboard>/w\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
-      \"action\": \"Move\",\n                    \"isComposite\": true,\n                   
-      \"isPartOfComposite\": false\n                },\n                {\n                   
-      \"name\": \"negative\",\n                    \"id\": \"2a8923a1-685f-42b6-8e36-6497fea46c06\",\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"up\",\n                    \"id\": \"7f62f485-375f-41e8-a263-154f6824df17\",\n                   
+      \"path\": \"<Keyboard>/upArrow\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"down\",\n                    \"id\": \"8798eec4-3097-4231-be9b-22afc640f05b\",\n                   
+      \"path\": \"<Keyboard>/s\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"down\",\n                    \"id\": \"78ba36e1-d44f-43b8-abca-c7e97324e7b0\",\n                   
       \"path\": \"<Keyboard>/downArrow\",\n                    \"interactions\":
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
-      \"\",\n                    \"action\": \"Move\",\n                    \"isComposite\":
+      \"\",\n                    \"action\": \"Navigate\",\n                    \"isComposite\":
       false,\n                    \"isPartOfComposite\": true\n                },\n               
-      {\n                    \"name\": \"positive\",\n                    \"id\":
-      \"e4ec7114-c24b-44f1-8aa3-ef61302aada8\",\n                    \"path\": \"<Keyboard>/upArrow\",\n                   
-      \"interactions\": \"\",\n                    \"processors\": \"\",\n                   
-      \"groups\": \"\",\n                    \"action\": \"Move\",\n                   
-      \"isComposite\": false,\n                    \"isPartOfComposite\": true\n               
-      },\n                {\n                    \"name\": \"\",\n                   
-      \"id\": \"81b8d869-698f-4db2-a8e5-a18e2c3a44a8\",\n                    \"path\":
-      \"<Keyboard>/escape\",\n                    \"interactions\": \"\",\n                   
+      {\n                    \"name\": \"left\",\n                    \"id\": \"9c48c007-5765-4933-af4a-01914e4b373a\",\n                   
+      \"path\": \"<Keyboard>/a\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"left\",\n                    \"id\": \"0d56c7cb-333a-4509-ae33-7422601fa667\",\n                   
+      \"path\": \"<Keyboard>/leftArrow\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Navigate\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": true\n                },\n               
+      {\n                    \"name\": \"right\",\n                    \"id\": \"460b97b7-1857-4b00-9b5a-454f751e8582\",\n                   
+      \"path\": \"<Keyboard>/d\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Navigate\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": true\n                },\n                {\n                   
+      \"name\": \"right\",\n                    \"id\": \"14cb4cd2-86ed-4933-91f2-6a22341cb410\",\n                   
+      \"path\": \"<Keyboard>/rightArrow\",\n                    \"interactions\":
+      \"\",\n                    \"processors\": \"\",\n                    \"groups\":
+      \"\",\n                    \"action\": \"Navigate\",\n                    \"isComposite\":
+      false,\n                    \"isPartOfComposite\": true\n                },\n               
+      {\n                    \"name\": \"\",\n                    \"id\": \"35915bfe-60e2-4956-90cb-9d788f324aa4\",\n                   
+      \"path\": \"<Keyboard>/e\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"\",\n                   
+      \"action\": \"Submit\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                },\n                {\n                   
+      \"name\": \"\",\n                    \"id\": \"d70a7b17-f9f3-4d30-b43c-304ad68c5ccc\",\n                   
+      \"path\": \"<Keyboard>/escape\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"\",\n                   
       \"action\": \"Cancel\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
@@ -882,7 +912,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 16178
+  controlID: 23281
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -940,9 +970,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 58e40000
-      m_LastClickedID: 58456
-      m_ExpandedIDs: 82d8feff4cd9feff28dafeffe030ffffa6b5ffff06fbfffff0720000fc72000014730000cae30000d4e40000ece4000020e50000
+      m_SelectedIDs: d6f90000fef90000
+      m_LastClickedID: 63998
+      m_ExpandedIDs: c8b2feffacb4feff82d8feff4cd9feff28dafeffe030ffffa6b5ffff06fbfffff0720000fc72000014730000cae30000d4e40000ece4000020e500006ef900007cfa000094fa0000cafa0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1047,7 +1077,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 283a0000
     m_LastClickedID: 14888
-    m_ExpandedIDs: ffffffff00000000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000e6730000e8730000ea730000ec730000ee730000f0730000f2730000f4730000f6730000
+    m_ExpandedIDs: ffffffff00000000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000e6730000e8730000ea730000ec730000ee730000f0730000f2730000f4730000f6730000008e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1072,10 +1102,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 58e40000
+    scrollPos: {x: 0, y: 429}
+    m_SelectedIDs: d6f90000fef90000
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000e6730000e8730000ea730000ec730000ee730000f0730000f2730000f4730000f6730000
+    m_ExpandedIDs: ffffffff00000000d0730000d2730000d4730000d6730000d8730000da730000dc730000de730000e0730000e2730000e4730000e6730000e8730000ea730000ec730000ee730000f0730000f2730000f4730000f6730000008e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1100,8 +1130,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 58e40000
-    m_LastClickedInstanceID: 58456
+    m_SelectedInstanceIDs: d6f90000fef90000
+    m_LastClickedInstanceID: 63958
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -1150,8 +1180,8 @@ MonoBehaviour:
     y: 0
     width: 405
     height: 635
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -1193,7 +1223,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 641
+  m_LastVerticalScrollValue: 486
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

@@ -30,7 +30,7 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     private void Start()
     {
         _inputManager = new InputManager();
-        _inputManager.Dialogue.Continue.performed += ContinueButton;
+        _inputManager.UI.Submit.performed += ContinueButton;
         _dialoguePanel.SetActive(false);
 
         _choicesText = new TextMeshProUGUI[_choices.Length];
@@ -55,7 +55,7 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     private void EnterDialogueMode(TextAsset inkJson)
     {
         _playerInputManager.DisableInput();
-        _inputManager.Dialogue.Enable();
+        _inputManager.UI.Enable();
         _currentStory = new Story(inkJson.text);
         _isDialoguePlaying = true;
         _hudPanel.SetActive(false);
@@ -68,7 +68,10 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     //scripts cannot call a function with a CallbackContext parameter.
     private void ContinueButton(InputAction.CallbackContext context)
     {
-        ContinueStory();
+        if (_currentStory.currentChoices.Count == 0)
+        {
+            ContinueStory();
+        }
     }
 
     private void ContinueStory()
@@ -123,6 +126,7 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     public void MakeChoice(int choiceIndex)
     {
         _currentStory.ChooseChoiceIndex(choiceIndex);
+        ContinueStory();
     }
     
     private void ExitDialogueMode()
@@ -132,6 +136,6 @@ public class DialogueManager : MonoSingleton<DialogueManager>
         _dialoguePanel.SetActive(false);
         _dialogueText.text = String.Empty;
         _playerInputManager.EnableInput();
-        _inputManager.Dialogue.Disable();
+        _inputManager.UI.Disable();
     }
 }
