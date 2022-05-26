@@ -8,13 +8,14 @@ namespace Characters.Player
 {
     public class PlayerAbility : MonoBehaviour
     {
-        [SerializeField] private ManaManagerSO _manaManager;
-
-        [SerializeField] private float _abilityCost;
+        [SerializeField, Header("Ability")] private float _abilityCost;
         [SerializeField] private float _lerpDuration;
         [SerializeField] private Color _activeColor;
         [SerializeField] private float _activeIntensity;
         [SerializeField] private Light2D _light;
+        
+        [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
+        
         private SpriteRenderer _spriteRenderer;
         private Color _inactiveColor;
         private float _inactiveIntensity;

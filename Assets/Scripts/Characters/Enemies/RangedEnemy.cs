@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Contracts;
 using UnityEngine;
 
 namespace Characters.Enemies
 {
-    public class FireGhostEnemy : EnemyAI, IDamageable
+    public class RangedEnemy : EnemyAI, IDamageable
     {
         [SerializeField, Header("Weapon")] private GameObject _projectile;
         [SerializeField] private float _firingDistance;

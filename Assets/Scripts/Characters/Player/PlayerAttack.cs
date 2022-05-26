@@ -8,9 +8,10 @@ namespace Characters.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
-        [SerializeField] private ManaManagerSO _manaManager;
-        [SerializeField] private float _projectileCost;
+        [SerializeField, Header("Weapon")] private float _projectileCost;
         [SerializeField] private float _attackCooldown;
+        
+        [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
 
         private bool _isAttacking;
         
