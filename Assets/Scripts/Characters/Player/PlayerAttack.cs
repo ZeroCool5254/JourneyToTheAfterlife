@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,11 +9,12 @@ namespace Characters.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
-        [SerializeField, Header("Weapon")] private float _projectileCost;
+        [SerializeField, Header("Weapon")] private GameObject _projectile;
+        [SerializeField] private float _projectileCost;
         [SerializeField] private float _attackCooldown;
         
-        [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
-        [SerializeField] private PlayerInputManagerSO _playerInputManager;
+        [SerializeField, Header("Events")] private UpdateManaEvent _manaChangedEvent;
+        [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
 
         private bool _isAttacking;
         
@@ -22,12 +24,12 @@ namespace Characters.Player
         {
             _inputManager = new InputManager();
             _inputManager.Player.Attack.performed += Attack;
-            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.AddListener(EnableInput);
         }
 
         private void OnDisable()
         {
-            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.RemoveListener(EnableInput);
         }
 
         private void EnableInput(bool state)
@@ -38,11 +40,11 @@ namespace Characters.Player
 
         private void Attack(InputAction.CallbackContext context)
         {
-            if (!_isAttacking && _manaManager.Mana >= _projectileCost)
+            if (!_isAttacking && _manaChangedEvent.Mana >= _projectileCost)
             {
-                //attack logic here maybe a pool?
-                Debug.Log("PlayerAttack::Is shooting projectiles");
-                _manaManager.DecreaseMana(_projectileCost);
+                GameObject projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
+                projectile.GetComponent<PlayerProjectile>().FaceRight = transform.GetComponent<PlayerController>().FaceRight;
+                _manaChangedEvent.DecreaseMana(_projectileCost);
                 StartCoroutine(AttackCooldownRoutine());
             }
         }

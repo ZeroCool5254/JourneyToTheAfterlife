@@ -37,16 +37,5 @@ namespace Characters.Enemies
             yield return new WaitForSeconds(_fireRate);
             _isFiring = false;
         }
-
-        public void Damage()
-        {
-            _health--;
-
-            if (_health <= 0)
-            {
-                //show death animation
-                Destroy(gameObject, 2f);
-            }
-        }
     }
 }

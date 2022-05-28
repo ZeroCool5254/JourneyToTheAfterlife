@@ -149,5 +149,16 @@ namespace Characters.Enemies
         {
             return Vector2.Distance(transform.position, _target.position) < _activateDistance;
         }
+        
+        public void Damage()
+        {
+            _health--;
+
+            if (_health <= 0)
+            {
+                //show death animation
+                Destroy(gameObject, 2f);
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,14 +19,15 @@ namespace Characters.Player
         [SerializeField] private float _yWallJumpForce;
         [SerializeField] private float _wallSlideSpeed;
         
-        [SerializeField, Header("Managers")] private HealthManagerSO _healthManager;
-        [SerializeField] private PlayerInputManagerSO _playerInputManager;
+        public bool FaceRight { get; private set; }
+        
+        [SerializeField, Header("Events")] private UpdateHealthEvent _healthChangedEvent;
+        [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
 
         private bool _isGrounded;
         private bool _isTouchingFront;
         private bool _wallSliding;
         private bool _wallJumping;
-        private bool _faceRight;
         private bool _isDead;
 
         private Rigidbody2D _rigid;
@@ -42,21 +44,21 @@ namespace Characters.Player
         {
             //enable Player input event
             //this will have to be removed once a working GameManager is in place
-            _playerInputManager.InputChangedEvent.Invoke(true);
+            _playerInputEvent.InputChangedEvent.Invoke(true);
             //delayed UI update event
-            _healthManager.HealthChangedEvent.Invoke(_healthManager.Health);
+            _healthChangedEvent.HealthChangedEvent.Invoke(_healthChangedEvent.Health);
         }
 
         private void OnEnable()
         {
             _inputManager = new InputManager();
             _inputManager.Player.Jump.performed += Jump;
-            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.AddListener(EnableInput);
         }
 
         private void OnDisable()
         {
-            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.RemoveListener(EnableInput);
         }
 
         private void EnableInput(bool state)
@@ -81,14 +83,14 @@ namespace Characters.Player
             //show movement animations
             if (xPos > 0)
             {
-                _faceRight = true;
+                FaceRight = true;
             }
             else if (xPos < 0)
             {
-                _faceRight = false;
+                FaceRight = false;
             }
 
-            if (_isTouchingFront && !_isGrounded && xPos != 0) _wallSliding = true;
+            if (_isTouchingFront && xPos != 0) _wallSliding = true;
             else _wallSliding = false;
             
             if (_wallSliding)
@@ -134,9 +136,9 @@ namespace Characters.Player
         public void Damage()
         {
             //play damage animation
-            _healthManager.DecreaseHealth();
+            _healthChangedEvent.DecreaseHealth();
 
-            if (_healthManager.Health <= 0)
+            if (_healthChangedEvent.Health <= 0)
             {
                 _isDead = true;
                 //play death animation

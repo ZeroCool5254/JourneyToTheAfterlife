@@ -7,7 +7,6 @@ namespace Characters.Enemies
     public class EnemyProjectile : MonoBehaviour
     {
         [SerializeField] private float _speed;
-        [SerializeField] private float _bulletDrop;
         [SerializeField] private float _lifeDuration;
         public bool FaceRight { get; set; }
         private int _direction;
@@ -26,7 +25,7 @@ namespace Characters.Enemies
         private void FixedUpdate()
         {
             _direction = FaceRight ? 1 : -1;
-            _rigid.velocity = new Vector2(_direction *(_speed * Time.deltaTime), _rigid.velocity.y - _bulletDrop);
+            _rigid.velocity = new Vector2(_direction *(_speed * Time.deltaTime), _rigid.velocity.y);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -34,13 +33,18 @@ namespace Characters.Enemies
             if (other.CompareTag("Player"))
             {
                 other.GetComponent<PlayerController>().Damage();
-                Destroy(gameObject);
+                Damage();
             }
 
             if (other.CompareTag("Ground"))
             {
-                Destroy(gameObject);
+                Damage();
             }
+        }
+
+        public void Damage()
+        {
+            Destroy(gameObject);
         }
     }
 }

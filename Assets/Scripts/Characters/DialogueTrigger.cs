@@ -1,5 +1,6 @@
 ﻿using System;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 
 namespace Characters
@@ -7,12 +8,21 @@ namespace Characters
     public class DialogueTrigger : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _visualCue;
-        [SerializeField] private TextAsset _inkJson;
+        [SerializeField] private TextAsset _startDialogueToPlay;
+        [SerializeField] private TextAsset _completedDialogueToPlay;
 
-        [SerializeField, Header("Managers")] private PlayerInteractionManagerSO _playerInteractionManager;
-        [SerializeField] private DialogueManagerSO _dialogueManager;
+        [SerializeField, Header("Events")] private PlayerInteractionEvent _interactionEvent;
+        [SerializeField] private TogglePlayerAbilityEvent _abilityEnabledEvent;
+        [SerializeField] private StartDialogueEvent _dialogueStartEvent;
+        [SerializeField] private EndDialogueEvent _dialogeEndEvent;
+
+        [Tooltip("If checked then the player has to be tangible or have the ability active to interact with this object")]
+        [SerializeField, Header("Behaviours")] private bool _requireAbilityEnabled;
 
         private bool _playerInRange;
+        private bool _canInteract;
+        private bool _isDialogueActive;
+        private bool _isDialogueCompleted;
 
         private void Awake()
         {
@@ -21,20 +31,58 @@ namespace Characters
 
         private void OnEnable()
         {
-            _playerInteractionManager.InteractionEvent.AddListener(Interact);
+            _interactionEvent.InteractionEvent.AddListener(StartDialogue);
+            _dialogeEndEvent.CompleteDialogueEvent.AddListener(EndDialogue);
         }
 
         private void OnDisable()
         {
-            _playerInteractionManager.InteractionEvent.RemoveListener(Interact);
+            _interactionEvent.InteractionEvent.RemoveListener(StartDialogue);
+            _dialogeEndEvent.CompleteDialogueEvent.RemoveListener(EndDialogue);
         }
 
-        private void Interact()
+        private void Update()
         {
-            if (_playerInRange)
+            if (_playerInRange && !_requireAbilityEnabled)
             {
-                //call dialogue
-                _dialogueManager.ActivateDialogueEvent.Invoke(_inkJson);
+                _visualCue.enabled = true;
+                _canInteract = true;
+            }
+            else if (_playerInRange && _requireAbilityEnabled && _abilityEnabledEvent.AbilityEnabled)
+            {
+                _visualCue.enabled = true;
+                _canInteract = true;
+            }
+            else
+            {
+                _visualCue.enabled = false;
+                _canInteract = false;
+            }
+        }
+
+        private void StartDialogue()
+        {
+            if (_playerInRange && _canInteract)
+            {
+                if (!_isDialogueCompleted)
+                {
+                    _dialogueStartEvent.ActivateDialogueEvent.Invoke(_startDialogueToPlay);
+                    _isDialogueActive = true;
+                }
+                else if (_isDialogueCompleted)
+                {
+                    _dialogueStartEvent.ActivateDialogueEvent.Invoke(_completedDialogueToPlay);
+                    _isDialogueActive = true;
+                }
+            }
+        }
+
+        private void EndDialogue()
+        {
+            if (_isDialogueActive)
+            {
+                _isDialogueCompleted = true;
+                _isDialogueActive = false;
             }
         }
 
@@ -43,7 +91,6 @@ namespace Characters
             if (other.CompareTag("Player"))
             {
                 _playerInRange = true;
-                _visualCue.enabled = true;
             }
         }
 
@@ -52,7 +99,6 @@ namespace Characters
             if (other.CompareTag("Player"))
             {
                 _playerInRange = false;
-                _visualCue.enabled = false;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,20 +8,20 @@ namespace Characters.Player
 {
     public class PlayerInteract : MonoBehaviour
     {
-        [SerializeField, Header("Managers")] private PlayerInputManagerSO _playerInputManager;
-        [SerializeField] private PlayerInteractionManagerSO _playerInteractionManager;
+        [SerializeField, Header("Events")] private TogglePlayerInputEvent _playerInputEvent;
+        [SerializeField] private PlayerInteractionEvent _interactionEvent;
         private InputManager _inputManager;
 
         private void OnEnable()
         {
             _inputManager = new InputManager();
             _inputManager.Player.Interact.performed += Interact;
-            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.AddListener(EnableInput);
         }
 
         private void OnDisable()
         {
-            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.RemoveListener(EnableInput);
         }
 
         private void EnableInput(bool state)
@@ -31,7 +32,7 @@ namespace Characters.Player
 
         private void Interact(InputAction.CallbackContext context)
         {
-            _playerInteractionManager.InteractionEvent.Invoke();
+            _interactionEvent.InteractionEvent.Invoke();
         }
     }
 }

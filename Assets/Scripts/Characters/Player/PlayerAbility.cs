@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
@@ -15,8 +16,9 @@ namespace Characters.Player
         [SerializeField] private float _activeIntensity;
         [SerializeField] private Light2D _light;
         
-        [SerializeField, Header("Managers")] private ManaManagerSO _manaManager;
-        [SerializeField] private PlayerInputManagerSO _playerInputManager;
+        [SerializeField, Header("Events")] private UpdateManaEvent _manaChangedEvent;
+        [SerializeField] private TogglePlayerAbilityEvent _abilityEnabledEvent;
+        [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
         
         private SpriteRenderer _spriteRenderer;
         private Color _inactiveColor;
@@ -35,19 +37,19 @@ namespace Characters.Player
             _inactiveColor = _spriteRenderer.color;
             _inactiveIntensity = _light.intensity;
             //delayed UI update event
-            _manaManager.ManaChangedEvent.Invoke(_manaManager.Mana);
+            _manaChangedEvent.ManaChangedEvent.Invoke(_manaChangedEvent.Mana);
         }
 
         private void OnEnable()
         {
             _inputManager = new InputManager();
             _inputManager.Player.Ability.performed += PerformAbility;
-            _playerInputManager.InputChangedEvent.AddListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.AddListener(EnableInput);
         }
 
         private void OnDisable()
         {
-            _playerInputManager.InputChangedEvent.RemoveListener(EnableInput);
+            _playerInputEvent.InputChangedEvent.RemoveListener(EnableInput);
         }
 
         private void EnableInput(bool state)
@@ -56,19 +58,35 @@ namespace Characters.Player
             else _inputManager.Player.Disable();
         }
 
-        public void PerformAbility(InputAction.CallbackContext context)
+        private void PerformAbility(InputAction.CallbackContext context)
         {
             Debug.Log("PlayerAbility::Should toggle ability");
-            if (!_isAbilityActive && _manaManager.Mana >= _abilityCost)
+            if (!_isAbilityActive && _manaChangedEvent.Mana >= _abilityCost)
             {
                 _isAbilityActive = true;
-                _manaManager.DecreaseMana(_abilityCost);
+                _abilityEnabledEvent.EnableAbility();
+                _manaChangedEvent.DecreaseMana(_abilityCost);
                 //the player is becoming visible to the living world
+                StartCoroutine(AbilityCooldownRoutine());
                 StartCoroutine(PerformAbilityRoutine(_activeColor, _activeIntensity));
             }
             else if (_isAbilityActive)
             {
                 _isAbilityActive = false;
+                _abilityEnabledEvent.DisableAbility();
+                //the player is becoming invisible to the living world
+                StopCoroutine(AbilityCooldownRoutine());
+                StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity));
+            }
+        }
+
+        private IEnumerator AbilityCooldownRoutine()
+        {
+            if (_isAbilityActive)
+            {
+                yield return new WaitForSeconds(5);
+                _isAbilityActive = false;
+                _abilityEnabledEvent.DisableAbility();
                 //the player is becoming invisible to the living world
                 StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity));
             }

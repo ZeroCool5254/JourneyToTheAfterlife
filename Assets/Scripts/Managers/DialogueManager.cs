@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using Ink.Runtime;
 using ScriptableObjects;
+using ScriptableObjects.Events;
 
 public class DialogueManager : MonoSingleton<DialogueManager>
 {
@@ -19,8 +20,9 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     [SerializeField, Header("Choices")] private GameObject[] _choices;
     private TextMeshProUGUI[] _choicesText;
 
-    [SerializeField, Header("Managers")] private DialogueManagerSO _dialogueManager;
-    [SerializeField] private PlayerInputManagerSO _playerInputManager;
+    [SerializeField, Header("Events")] private StartDialogueEvent _dialogueEvent;
+    [SerializeField] private EndDialogueEvent _dialogueEndEvent;
+    [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
 
     private InputManager _inputManager;
     private Story _currentStory;
@@ -44,17 +46,17 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 
     private void OnEnable()
     {
-        _dialogueManager.ActivateDialogueEvent.AddListener(EnterDialogueMode);
+        _dialogueEvent.ActivateDialogueEvent.AddListener(EnterDialogueMode);
     }
 
     private void OnDisable()
     {
-        _dialogueManager.ActivateDialogueEvent.RemoveListener(EnterDialogueMode);
+        _dialogueEvent.ActivateDialogueEvent.RemoveListener(EnterDialogueMode);
     }
 
     private void EnterDialogueMode(TextAsset inkJson)
     {
-        _playerInputManager.DisableInput();
+        _playerInputEvent.DisableInput();
         _inputManager.UI.Enable();
         _currentStory = new Story(inkJson.text);
         _isDialoguePlaying = true;
@@ -135,7 +137,8 @@ public class DialogueManager : MonoSingleton<DialogueManager>
         _hudPanel.SetActive(true);
         _dialoguePanel.SetActive(false);
         _dialogueText.text = String.Empty;
-        _playerInputManager.EnableInput();
+        _playerInputEvent.EnableInput();
         _inputManager.UI.Disable();
+        _dialogueEndEvent.CompleteDialogueEvent.Invoke();
     }
 }
