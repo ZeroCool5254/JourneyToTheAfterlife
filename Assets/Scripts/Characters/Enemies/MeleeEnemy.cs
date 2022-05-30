@@ -21,6 +21,8 @@ namespace Characters.Enemies
 
         private void Attack()
         {
+            int selectedAttackClip = Random.Range(0, _attackClips.Length);
+            _playAudioEvent.PlaySelectedClip(_attackClips[selectedAttackClip]);
             Debug.Log("DemonicImpEnemy::Should Attack");
             //show the attack anim and set the collider to active
         }

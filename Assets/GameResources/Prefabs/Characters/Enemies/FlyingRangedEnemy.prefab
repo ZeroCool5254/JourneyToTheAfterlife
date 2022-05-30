@@ -251,6 +251,25 @@ MonoBehaviour:
   _xWallJumpForce: 0
   _yWallJumpForce: 0
   _wallSlideSpeed: 0
+  _attackClips:
+  - {fileID: 8300000, guid: 5bbd7aa4cdf82a64fa74595ced13196c, type: 3}
+  - {fileID: 8300000, guid: 58fe604469f22ae4886953e5aa61929b, type: 3}
+  - {fileID: 8300000, guid: 43f38d2e5b198a443be2f5e107e9fd66, type: 3}
+  _jumpClips:
+  - {fileID: 8300000, guid: 857ee649a20b033408c44cdc813b0286, type: 3}
+  - {fileID: 8300000, guid: 2b9b4ba3290e9c8428212def57bf9838, type: 3}
+  - {fileID: 8300000, guid: 372f7aec8997bdd49a402a6f7257ffaf, type: 3}
+  - {fileID: 8300000, guid: e029cdc21bd1af3439553b58932416db, type: 3}
+  _damageClips:
+  - {fileID: 8300000, guid: 4552f1018256f8a4db1df060d0a1b012, type: 3}
+  - {fileID: 8300000, guid: 2d3da5a13aef01249af88dfc1b88dccc, type: 3}
+  - {fileID: 8300000, guid: eb633ca84d01e684abf3a0849b880366, type: 3}
+  - {fileID: 8300000, guid: fbfc1d6d3e59f1e42b01517233d3dee9, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 8ab4cdd7c5248a74b8d2f10c6ed16dda, type: 3}
+  - {fileID: 8300000, guid: 28d152f4a80222342bf06a91f30975d9, type: 3}
+  - {fileID: 8300000, guid: bdfa32d74687b3f4d8775b5cb07b5298, type: 3}
+  - {fileID: 8300000, guid: 911b0560cf66a1b4bb7cee59fc67030f, type: 3}
   _target: {fileID: 0}
   _activateDistance: 15
   _pathUpdateSeconds: 0.5
@@ -262,6 +281,7 @@ MonoBehaviour:
   _wallSlideEnabled: 0
   _directionLookEnabled: 1
   _collectiblePrefab: {fileID: 8069381257199574220, guid: 1cfeb2405663d7243807045ab361051b, type: 3}
+  _playAudioEvent: {fileID: 11400000, guid: 66e822bb3ae12aa46ac597c083b2ef5c, type: 2}
   _projectile: {fileID: 2034785879190821029, guid: 9f0c93e1173c1c64cbeb17dd621542d9, type: 3}
   _firingDistance: 7
   _fireRate: 1

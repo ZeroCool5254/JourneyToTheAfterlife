@@ -49,8 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea524bd7b51445caae5e0acd92563b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collectedClips:
+  - {fileID: 8300000, guid: c4c1de003948ede44933f8ac601b610e, type: 3}
+  - {fileID: 8300000, guid: 9046a7a461f2df948a11821ad366bced, type: 3}
   _healthEvent: {fileID: 11400000, guid: 8f2ad3926b4ebbe4aad572477f3fe0f7, type: 2}
   _manaEvent: {fileID: 11400000, guid: 85b131c24011149459ba16a09a436229, type: 2}
+  _playAudioEvent: {fileID: 11400000, guid: 66e822bb3ae12aa46ac597c083b2ef5c, type: 2}
 --- !u!212 &8069381257199574835
 SpriteRenderer:
   m_ObjectHideFlags: 0

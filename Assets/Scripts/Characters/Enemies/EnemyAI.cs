@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 using Pathfinding;
+using ScriptableObjects.Events;
 
 namespace Characters.Enemies
 {
@@ -14,6 +16,11 @@ namespace Characters.Enemies
         [SerializeField] private float _xWallJumpForce;
         [SerializeField] private float _yWallJumpForce;
         [SerializeField] private float _wallSlideSpeed;
+
+        [SerializeField, Header("Audio")] protected AudioClip[] _attackClips;
+        [SerializeField] private AudioClip[] _jumpClips;
+        [SerializeField] private AudioClip[] _damageClips;
+        [SerializeField] private AudioClip[] _deathClips;
 
         [SerializeField, Header("Pathfinding")] protected Transform _target;
         [SerializeField] private float _activateDistance = 10f;
@@ -30,6 +37,8 @@ namespace Characters.Enemies
 
         [SerializeField, Header("Drops")] private GameObject _collectiblePrefab;
 
+        [SerializeField, Header("Events")] protected PlayAudioEvent _playAudioEvent;
+
         private Path _path;
         private Seeker _seeker;
         private Rigidbody2D _rigid;
@@ -37,10 +46,10 @@ namespace Characters.Enemies
         
         private bool _isGrounded;
         private bool _isTouchingFront;
+        private bool _canJump;
         private bool _wallSliding;
         private bool _wallJumping;
         protected bool _faceRight;
-        protected bool _isDead;
 
         public virtual void Init()
         {
@@ -112,14 +121,18 @@ namespace Characters.Enemies
                 //check if the next node is higher than the jump requirement
                 if (direction.y > _jumpNodeHeightRequirement)
                 {
+                    
                     //if the enemy is grounded then the enemy can perform a regular jump
                     if (_isGrounded)
                     {
+                        StartCoroutine(JumpCooldownRoutine());
                         _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
+                        
                     }
                     //if the enemy is sliding, and is allowed to wall jump then perform a wall jump
                     else if (_wallSliding && _wallJumpEnabled)
                     {
+                        StartCoroutine(JumpCooldownRoutine());
                         float jumpDir = _rigid.velocity.x;
                         _rigid.velocity = new Vector2(_xWallJumpForce * -jumpDir, _yWallJumpForce);
                     }
@@ -146,6 +159,15 @@ namespace Characters.Enemies
                 _currentWaypoint++;
             }
         }
+        
+        private IEnumerator JumpCooldownRoutine()
+        {
+            int selectedJumpClip = Random.Range(0, _jumpClips.Length);
+            _playAudioEvent.PlaySelectedClip(_jumpClips[selectedJumpClip]);
+            _canJump = false;
+            yield return new WaitForSeconds(0.5f);
+            _canJump = true;
+        }
 
         private bool TargetInDistance()
         {
@@ -161,8 +183,12 @@ namespace Characters.Enemies
                 //show death animation
                 int i = Random.Range(0, 2);
                 if (i == 1) Instantiate(_collectiblePrefab, transform.position, Quaternion.identity);
+                int selectedDeathClip = Random.Range(0, _deathClips.Length);
+                _playAudioEvent.PlaySelectedClip(_deathClips[selectedDeathClip]);
                 Destroy(gameObject);
             }
+            int selectedClip = Random.Range(0, _damageClips.Length);
+            _playAudioEvent.PlaySelectedClip(_damageClips[selectedClip]);
         }
     }
 }

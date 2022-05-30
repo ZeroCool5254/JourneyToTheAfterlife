@@ -3,6 +3,7 @@ using System.Collections;
 using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Characters.Player
 {
@@ -18,12 +19,17 @@ namespace Characters.Player
         [SerializeField] private float _yWallJumpForce;
         [SerializeField] private float _wallSlideSpeed;
         
+        [SerializeField, Header("Audio")] private AudioClip[] _jumpClips;
+        [SerializeField] private AudioClip[] _damageClips;
+        [SerializeField] private AudioClip[] _deathClips;
+        
         public bool FaceRight { get; private set; }
         
         [SerializeField, Header("Events")] private UpdateHealthEvent _healthChangedEvent;
         [SerializeField] private UpdateManaEvent _manaChangedEvent;
         [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
         [SerializeField] private LoadSceneEvent _loadSceneEvent;
+        [SerializeField] private PlayAudioEvent _playAudioEvent;
 
         private bool _isGrounded;
         private bool _isTouchingFront;
@@ -104,14 +110,17 @@ namespace Characters.Player
 
         private void Jump(InputAction.CallbackContext context)
         {
+            int selectedJumpClip = Random.Range(0, _jumpClips.Length);
             if (_isGrounded && !_wallSliding)
             {
+                _playAudioEvent.PlaySelectedClip(_jumpClips[selectedJumpClip]);
                 _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
                 //show jump animations
             }
 
             if (_wallSliding)
             {
+                _playAudioEvent.PlaySelectedClip(_jumpClips[selectedJumpClip]);
                 StartCoroutine(WallJumpCooldownRoutine());
             }
         }
@@ -144,8 +153,14 @@ namespace Characters.Player
             if (_healthChangedEvent.Health <= 0)
             {
                 _isDead = true;
+                int selectedDeathClip = Random.Range(0, _deathClips.Length);
+                _playAudioEvent.PlaySelectedClip(_deathClips[selectedDeathClip]);
                 _loadSceneEvent.LoadSelectedSceneEvent.Invoke("GameOver");
+                return;
             }
+
+            int selectedDamageClip = Random.Range(0, _damageClips.Length);
+            _playAudioEvent.PlaySelectedClip(_damageClips[selectedDamageClip]);
         }
     }
 }

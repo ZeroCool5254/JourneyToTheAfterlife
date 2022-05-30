@@ -5,6 +5,7 @@ using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 namespace Characters.Player
 {
@@ -15,10 +16,15 @@ namespace Characters.Player
         [SerializeField] private Color _activeColor;
         [SerializeField] private float _activeIntensity;
         [SerializeField] private Light2D _light;
+
+        [SerializeField, Header("Audio")] private AudioClip[] _abilityActiveClips;
+        [SerializeField] private AudioClip[] _abilityInactiveClips;
+        
         
         [SerializeField, Header("Events")] private UpdateManaEvent _manaChangedEvent;
         [SerializeField] private TogglePlayerAbilityEvent _abilityEnabledEvent;
         [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
+        [SerializeField] private PlayAudioEvent _playAudioEvent;
         
         private SpriteRenderer _spriteRenderer;
         private Color _inactiveColor;
@@ -63,6 +69,8 @@ namespace Characters.Player
             Debug.Log("PlayerAbility::Should toggle ability");
             if (!_isAbilityActive && _manaChangedEvent.Mana >= _abilityCost)
             {
+                int selectedActiveClip = Random.Range(0, _abilityActiveClips.Length);
+                _playAudioEvent.PlaySelectedClip(_abilityActiveClips[selectedActiveClip]);
                 _isAbilityActive = true;
                 _abilityEnabledEvent.EnableAbility();
                 _manaChangedEvent.DecreaseMana(_abilityCost);
@@ -72,6 +80,8 @@ namespace Characters.Player
             }
             else if (_isAbilityActive)
             {
+                int selectedInactiveClip = Random.Range(0, _abilityInactiveClips.Length);
+                _playAudioEvent.PlaySelectedClip(_abilityInactiveClips[selectedInactiveClip]);
                 _isAbilityActive = false;
                 _abilityEnabledEvent.DisableAbility();
                 //the player is becoming invisible to the living world
@@ -85,6 +95,8 @@ namespace Characters.Player
             if (_isAbilityActive)
             {
                 yield return new WaitForSeconds(5);
+                int selectedInactiveClip = Random.Range(0, _abilityInactiveClips.Length);
+                _playAudioEvent.PlaySelectedClip(_abilityInactiveClips[selectedInactiveClip]);
                 _isAbilityActive = false;
                 _abilityEnabledEvent.DisableAbility();
                 //the player is becoming invisible to the living world

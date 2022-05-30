@@ -14,6 +14,8 @@ namespace Characters.Enemies
         {
             if (TargetInFiringDistance() && !_isFiring)
             {
+                int selectedAttackClip = Random.Range(0, _attackClips.Length);
+                _playAudioEvent.PlaySelectedClip(_attackClips[selectedAttackClip]);
                 FireProjectile();
                 StartCoroutine(FireCooldownRoutine());
             }
