@@ -11078,7 +11078,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: colored-transparent_522
+      name: Collectible
       rect:
         serializedVersion: 2
         x: 544
@@ -23278,7 +23278,6 @@ TextureImporter:
       colored-transparent_685: 246132466
       colored-transparent_540: 444076959
       colored-transparent_150: 833716000
-      colored-transparent_522: 1324053350
       colored-transparent_762: -1785637851
       colored-transparent_107: 1106792683
       colored-transparent_346: -726033590
@@ -23470,6 +23469,7 @@ TextureImporter:
       colored-transparent_381: 1790690747
       colored-transparent_181: -1565166625
       colored-transparent_291: -1489512192
+      Collectible: 1324053350
       colored-transparent_82: 1428022363
       colored-transparent_189: -255335818
       colored-transparent_473: -1757506062

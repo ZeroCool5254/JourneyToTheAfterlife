@@ -282,7 +282,7 @@ MonoBehaviour:
   _interactionEvent: {fileID: 11400000, guid: 1fc99522762a3324eabd10620b8caf84, type: 2}
   _abilityEnabledEvent: {fileID: 11400000, guid: df3a45b3deb85ff4aab019a69f8d4a0f, type: 2}
   _dialogueStartEvent: {fileID: 11400000, guid: 51bf76ca4a0bace40a3ee413a4ede7e9, type: 2}
-  _dialogeEndEvent: {fileID: 11400000, guid: 35d1e424beb33da4a867b6631f48e1bf, type: 2}
+  _dialogueEvent: {fileID: 11400000, guid: 35d1e424beb33da4a867b6631f48e1bf, type: 2}
   _requireAbilityEnabled: 1
 --- !u!50 &2462475632223051398
 Rigidbody2D:

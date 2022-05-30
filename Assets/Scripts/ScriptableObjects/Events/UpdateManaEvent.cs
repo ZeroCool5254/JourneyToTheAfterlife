@@ -14,8 +14,13 @@ namespace ScriptableObjects.Events
 
         private void OnEnable()
         {
-            Mana = MaxMana;
             ManaChangedEvent ??= new UnityEvent<float>();
+        }
+
+        public void SetMana()
+        {
+            Mana = MaxMana;
+            ManaChangedEvent.Invoke(Mana);
         }
 
         public void IncreaseMana(float amount)

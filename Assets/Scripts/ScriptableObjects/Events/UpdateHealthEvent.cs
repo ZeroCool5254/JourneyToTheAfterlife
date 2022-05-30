@@ -14,8 +14,13 @@ namespace ScriptableObjects.Events
         
         private void OnEnable()
         {
-            Health = MaxHealth;
             HealthChangedEvent ??= new UnityEvent<int>();
+        }
+
+        public void SetHealth()
+        {
+            Health = MaxHealth;
+            HealthChangedEvent.Invoke(Health);
         }
 
         public void IncreaseHealth()

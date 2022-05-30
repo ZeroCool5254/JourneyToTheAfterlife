@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using ScriptableObjects;
 using ScriptableObjects.Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,7 +21,9 @@ namespace Characters.Player
         public bool FaceRight { get; private set; }
         
         [SerializeField, Header("Events")] private UpdateHealthEvent _healthChangedEvent;
+        [SerializeField] private UpdateManaEvent _manaChangedEvent;
         [SerializeField] private TogglePlayerInputEvent _playerInputEvent;
+        [SerializeField] private LoadSceneEvent _loadSceneEvent;
 
         private bool _isGrounded;
         private bool _isTouchingFront;
@@ -35,18 +36,15 @@ namespace Characters.Player
         
         private InputManager _inputManager;
 
-        private void Awake()
-        {
-            _rigid = GetComponent<Rigidbody2D>();
-        }
-
         private void Start()
         {
+            _rigid = GetComponent<Rigidbody2D>();
             //enable Player input event
             //this will have to be removed once a working GameManager is in place
             _playerInputEvent.InputChangedEvent.Invoke(true);
             //delayed UI update event
-            _healthChangedEvent.HealthChangedEvent.Invoke(_healthChangedEvent.Health);
+            _healthChangedEvent.SetHealth();
+            _manaChangedEvent.SetMana();
         }
 
         private void OnEnable()
@@ -131,6 +129,11 @@ namespace Characters.Player
             {
                 Damage();
             }
+
+            if (other.CompareTag("FinishGame"))
+            {
+                _loadSceneEvent.LoadSelectedSceneEvent.Invoke("GameWon");
+            }
         }
 
         public void Damage()
@@ -141,8 +144,7 @@ namespace Characters.Player
             if (_healthChangedEvent.Health <= 0)
             {
                 _isDead = true;
-                //play death animation
-                //Game over
+                _loadSceneEvent.LoadSelectedSceneEvent.Invoke("GameOver");
             }
         }
     }

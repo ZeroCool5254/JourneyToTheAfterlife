@@ -28,6 +28,8 @@ namespace Characters.Enemies
         [SerializeField] private bool _wallSlideEnabled;
         [SerializeField] private bool _directionLookEnabled;
 
+        [SerializeField, Header("Drops")] private GameObject _collectiblePrefab;
+
         private Path _path;
         private Seeker _seeker;
         private Rigidbody2D _rigid;
@@ -157,7 +159,9 @@ namespace Characters.Enemies
             if (_health <= 0)
             {
                 //show death animation
-                Destroy(gameObject, 2f);
+                int i = Random.Range(0, 2);
+                if (i == 1) Instantiate(_collectiblePrefab, transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
         }
     }

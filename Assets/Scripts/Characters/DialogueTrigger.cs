@@ -14,7 +14,7 @@ namespace Characters
         [SerializeField, Header("Events")] private PlayerInteractionEvent _interactionEvent;
         [SerializeField] private TogglePlayerAbilityEvent _abilityEnabledEvent;
         [SerializeField] private StartDialogueEvent _dialogueStartEvent;
-        [SerializeField] private EndDialogueEvent _dialogeEndEvent;
+        [SerializeField] private EndDialogueEvent _dialogueEvent;
 
         [Tooltip("If checked then the player has to be tangible or have the ability active to interact with this object")]
         [SerializeField, Header("Behaviours")] private bool _requireAbilityEnabled;
@@ -32,13 +32,13 @@ namespace Characters
         private void OnEnable()
         {
             _interactionEvent.InteractionEvent.AddListener(StartDialogue);
-            _dialogeEndEvent.CompleteDialogueEvent.AddListener(EndDialogue);
+            _dialogueEvent.CompleteDialogueEvent.AddListener(EndDialogue);
         }
 
         private void OnDisable()
         {
             _interactionEvent.InteractionEvent.RemoveListener(StartDialogue);
-            _dialogeEndEvent.CompleteDialogueEvent.RemoveListener(EndDialogue);
+            _dialogueEvent.CompleteDialogueEvent.RemoveListener(EndDialogue);
         }
 
         private void Update()

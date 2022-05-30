@@ -177,6 +177,7 @@ MonoBehaviour:
   _wallJumpEnabled: 1
   _wallSlideEnabled: 1
   _directionLookEnabled: 1
+  _collectiblePrefab: {fileID: 8069381257199574220, guid: 1cfeb2405663d7243807045ab361051b, type: 3}
   _projectile: {fileID: 2034785879190821029, guid: 9f0c93e1173c1c64cbeb17dd621542d9, type: 3}
   _firingDistance: 7
   _fireRate: 1

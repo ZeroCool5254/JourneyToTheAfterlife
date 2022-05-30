@@ -11,6 +11,7 @@ TagManager:
   - EnemyWeapon
   - NPC
   - FinishGame
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - EnemyProjectile
   - EnemyWeapon
   - NPC
-  - 
+  - Collectible
   - 
   - 
   - 
