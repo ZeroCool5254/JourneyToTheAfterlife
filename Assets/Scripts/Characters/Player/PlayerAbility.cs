@@ -15,7 +15,8 @@ namespace Characters.Player
         [SerializeField] private float _lerpDuration;
         [SerializeField] private Color _activeColor;
         [SerializeField] private float _activeIntensity;
-        [SerializeField] private Light2D _light;
+        [SerializeField] private Light2D _standardLight;
+        [SerializeField] private Light2D _abilityLight;
 
         [SerializeField, Header("Audio")] private AudioClip[] _abilityActiveClips;
         [SerializeField] private AudioClip[] _abilityInactiveClips;
@@ -41,7 +42,7 @@ namespace Characters.Player
         {
 
             _inactiveColor = _spriteRenderer.color;
-            _inactiveIntensity = _light.intensity;
+            _inactiveIntensity = _abilityLight.intensity;
             //delayed UI update event
             _manaChangedEvent.ManaChangedEvent.Invoke(_manaChangedEvent.Mana);
         }
@@ -76,7 +77,7 @@ namespace Characters.Player
                 _manaChangedEvent.DecreaseMana(_abilityCost);
                 //the player is becoming visible to the living world
                 StartCoroutine(AbilityCooldownRoutine());
-                StartCoroutine(PerformAbilityRoutine(_activeColor, _activeIntensity));
+                StartCoroutine(PerformAbilityRoutine(_activeColor, _activeIntensity, _inactiveIntensity));
             }
             else if (_isAbilityActive)
             {
@@ -86,7 +87,7 @@ namespace Characters.Player
                 _abilityEnabledEvent.DisableAbility();
                 //the player is becoming invisible to the living world
                 StopCoroutine(AbilityCooldownRoutine());
-                StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity));
+                StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity, _activeIntensity));
             }
         }
 
@@ -100,24 +101,27 @@ namespace Characters.Player
                 _isAbilityActive = false;
                 _abilityEnabledEvent.DisableAbility();
                 //the player is becoming invisible to the living world
-                StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity));
+                StartCoroutine(PerformAbilityRoutine(_inactiveColor, _inactiveIntensity, _activeIntensity));
             }
         }
 
-        private IEnumerator PerformAbilityRoutine(Color targetColor, float targetIntensity)
+        private IEnumerator PerformAbilityRoutine(Color targetColor, float targetAbilityIntensity, float targetStandardIntensity)
         {
             float time = 0;
-            float startIntensity = _light.intensity;
+            float startStandardIntensity = _standardLight.intensity;
+            float startAbilityIntensity = _abilityLight.intensity;
             Color startColor = _spriteRenderer.color;
             while (time < _lerpDuration)
             {
-                _light.intensity = Mathf.Lerp(startIntensity, targetIntensity, time / _lerpDuration);
+                _standardLight.intensity = Mathf.Lerp(startStandardIntensity, targetStandardIntensity, time / _lerpDuration);
+                _abilityLight.intensity = Mathf.Lerp(startAbilityIntensity, targetAbilityIntensity, time / _lerpDuration);
                 _spriteRenderer.color = Color.Lerp(startColor, targetColor, time / _lerpDuration);
                 time += Time.deltaTime;
                 yield return null;
             }
             _spriteRenderer.color = targetColor;
-            _light.intensity = targetIntensity;
+            _standardLight.intensity = targetStandardIntensity;
+            _abilityLight.intensity = targetAbilityIntensity;
         }
     }
 }

@@ -123,14 +123,14 @@ namespace Characters.Enemies
                 {
                     
                     //if the enemy is grounded then the enemy can perform a regular jump
-                    if (_isGrounded)
+                    if (_isGrounded && _canJump)
                     {
                         StartCoroutine(JumpCooldownRoutine());
                         _rigid.velocity = new Vector2(_rigid.velocity.x, _jumpForce);
                         
                     }
                     //if the enemy is sliding, and is allowed to wall jump then perform a wall jump
-                    else if (_wallSliding && _wallJumpEnabled)
+                    else if (_wallSliding && _wallJumpEnabled && _canJump)
                     {
                         StartCoroutine(JumpCooldownRoutine());
                         float jumpDir = _rigid.velocity.x;

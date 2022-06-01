@@ -1494,13 +1494,13 @@ MonoBehaviour:
 
     E = Interact
 
-    R CTRL = Attack
+    M = Attack
 
-    R Shift = Ability
+    L = Ability
 
 
-    You
-    can use the walls to jump to higher areas.
+    You can use the
+    walls to jump to higher areas.
 
 '
   m_isRightToLeft: 0
