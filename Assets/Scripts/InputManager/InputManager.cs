@@ -121,7 +121,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bc44bcb1-ed8a-4cfc-a2b2-459c70acef0d"",
-                    ""path"": ""<Keyboard>/rightCtrl"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -132,7 +132,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""116f5a45-456f-413f-a32a-4779fc0cb26e"",
-                    ""path"": ""<Keyboard>/rightShift"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
